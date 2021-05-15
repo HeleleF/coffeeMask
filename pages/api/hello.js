@@ -18,7 +18,7 @@ export default async (req, res) => {
     "PKDKzDjQ_Cs",
   ];
 
-  const { data } = axios.default.get(
+  const { data } = await axios.default.get(
     `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${IDS.join(
       ","
     )}&key=${process.env.API_KEY}`
