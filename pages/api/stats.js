@@ -19,16 +19,23 @@ export default async (req, res) => {
   ];
 
   const { data } = await axios.default.get(
-    `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${IDS.join(
+    `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&part=statistics&id=${IDS.join(
       ","
-    )}&key=${process.env.API_KEY}`
+    )}&key=${process.env.API_KEY ?? "AIzaSyA0YkJE3gt7jC2LykLj-sY3JJcwwvRawKA"}`
   );
 
-  const results = data.items.map(({ statistics }) => ({
-    views: statistics.viewCount,
-    likes: statistics.likeCount,
-    dislikes: statistics.dislikeCount,
-  }));
+  const results = data.items
+    .map(({ statistics, snippet, id }) => ({
+      id,
+      title: snippet.title,
+      thumbnail: snippet.thumbnails.high,
+      views: statistics.viewCount,
+      likes: statistics.likeCount,
+      dislikes: statistics.dislikeCount,
+    }))
+    .sort((x, y) =>
+      y.likes - x.likes === 0 ? y.views - x.views : y.likes - x.likes
+    );
 
   return res.status(200).send(results);
 };
