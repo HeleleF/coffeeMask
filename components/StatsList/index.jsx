@@ -26,10 +26,10 @@ export default function StatsList() {
                     <a href={`https://www.youtube.com/watch?v=${stat.id}`}>{stat.title}</a>
                     <Image src={stat.thumbnail.url} alt="thumb" loading="lazy"  width={480} height={360} />
                     <span>
-                        {stat.likes} 👍
+                        {stat.likes} 👍 
                     </span>
                     <span>
-                        {stat.dislikes} 👎
+                        {stat.dislikes} 👎 
                     </span>
                     <span>
                         {stat.views} 👀
