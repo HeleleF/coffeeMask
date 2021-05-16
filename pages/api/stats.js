@@ -30,5 +30,5 @@ export default async (req, res) => {
     dislikes: statistics.dislikeCount,
   }));
 
-  return res.send(200).json(results);
+  return res.status(200).send(results);
 };
