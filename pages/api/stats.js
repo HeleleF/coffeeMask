@@ -24,5 +24,11 @@ export default async (req, res) => {
     )}&key=${process.env.API_KEY}`
   );
 
-  return res.send(200).json(data);
+  const results = data.items.map(({ statistics }) => ({
+    views: statistics.viewCount,
+    likes: statistics.likeCount,
+    dislikes: statistics.dislikeCount,
+  }));
+
+  return res.send(200).json(results);
 };
